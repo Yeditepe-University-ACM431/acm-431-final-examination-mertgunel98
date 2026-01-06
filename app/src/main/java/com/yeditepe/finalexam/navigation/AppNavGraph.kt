@@ -13,9 +13,19 @@ fun AppNavGraph() {
         navController = navController,
         startDestination = "tasks"
     ) {
+        composable(
+            route = "task_detail/{taskId}",
+            arguments = listOf(navArgument("taskId") { type = NavType.IntType })
+        ) { backStackEntry ->
 
-        // TODO 1: Add composable for "tasks"
-
-        // TODO 2: Add composable for "taskDetail/{title}"
+            val taskId = backStackEntry.arguments?.getInt("taskId") ?: 0
+            TaskDetailScreen(
+                taskId = taskId,
+                viewModel = viewModel
+            )
+        }
     }
 }
+
+
+
