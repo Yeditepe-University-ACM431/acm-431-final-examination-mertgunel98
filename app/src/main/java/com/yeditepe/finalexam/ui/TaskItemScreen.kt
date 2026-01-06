@@ -13,22 +13,27 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun TaskItemScreen() {
 
-    // TODO 1: Create a mutable state to hold completion status (Boolean)
-    // Initial value should be false
-
+    fun TaskItemScreen(
+        taskId: Int,
+        viewModel: TaskViewModel = viewModel()
+        val task = viewModel.getTaskById(taskId)
+        ) {
+            if (task!= null) {
     Column(modifier = Modifier.padding(16.dp)) {
 
         Text(
             text = "Submit Final Project",
             style = MaterialTheme.typography.titleLarge
         )
+        else {
+        Text("Task not found", modifier = Modifier.padding(16.dp))
 
-        // TODO 2: Show text "Completed" or "Not Completed"
-        // depending on completion state
+
 
         Button(
             onClick = {
-                // TODO 3: Toggle completion state
+                controller.navigate(Destination.TASK_DETAIL.route.replace("{tasklist}", task.taskID))
+            }
             }
         ) {
             Text("Change Status")
@@ -39,5 +44,8 @@ fun TaskItemScreen() {
 @Preview(showBackground = true)
 @Composable
 fun TaskItemPreview() {
-    // TODO: Call TaskItemScreen
+    TaskItem(
+        task = task(1, "Test Task", "Description", 0),
+        onClick = {}
+    )
 }
