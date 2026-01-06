@@ -4,10 +4,16 @@ import androidx.lifecycle.ViewModel
 
 class TaskViewModel : ViewModel() {
 
-    // TODO 1: Create a mutable state list of Task objects
-    // Initially add at least 2 tasks
 
     fun toggleTask(taskId: Int) {
-        // TODO 2: Update isCompleted for the given task
+        private fun loadSampleTask() {
+            val sampleData = listOf(
+                Task(1, "Submit Final Project ",)
+                Task(2, "TASK 2 ",)
+                Task(3, "TASK 3 ", )
+
+            )
+            _task.value = sampleData
+        }
     }
 }
