@@ -13,21 +13,65 @@ import com.yeditepe.finalexam.viewmodel.TaskViewModel
 @Composable
 fun TaskListScreen(viewModel: TaskViewModel = viewModel()) {
 
-    // TODO 3: Read task list from ViewModel
+    onTaskClick: (Int) -> Unit
+    ) {
+        val tasks by viewModel.tasks.collectAsState()
 
-    Column {
-        // TODO 4: Display task titles and completion status
-        // Use a simple Column or LazyColumn
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(00xFFFFFBFE))
+        ) {
+
+            Text(
+                text = "Task List",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color(0xFF222222),
+                modifier = Modifier.padding(16.dp)
+            )
+
+            LazyColumn {
+                items(tasks { task->
+                   TaskItem(task = task, onClick = { onTaskClick(task.id) })
+                }
+            }
+        }
     }
-}
-
 @Composable
 fun TaskRow(task: Task, navController: NavController) {
 
+}
     Text(
         text = task.title,
         modifier = Modifier.clickable {
-            // TODO 3: Navigate to detail screen with task title
+            fun TaskItem(task: Task, onClick: () -> Unit) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .clickable { onClick() },
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFFFFFBFE))
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+
+                        Text(
+                            text = task.title,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFFD0BCFF)
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+
+                        Text(
+                            text = task.description,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Normal,
+                            color = Color(0xFFD0BCFF)),
+                            maxLines = 2
+                        )
+                    }
+                }
         }
     )
 }
