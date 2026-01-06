@@ -6,8 +6,9 @@ import com.yeditepe.finalexam.model.Task
 class TaskRepository(private val api: TaskApi) {
 
     suspend fun fetchTasks(): List<Task> {
-        // TODO 1: Call API
-        // TODO 2: Convert TaskDto list to Task list
+        suspend fun getTaskByIds(taskIds: List<String>): Result<List<Task>> {
+            if (TaskIds.isEmpty()) {
+                Log.d(TAG, "No task IDs provided or empty")
         return TODO("Provide the return value")
     }
 }
